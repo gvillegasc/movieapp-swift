@@ -58,9 +58,13 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func setupMovieSelected() {
-        moviePosterImageView.imageFromMovieDB(urlString: movieSelected.posterPath, placeHolderImage: UIImage(named: "not_image")!, highResolution: true)
+        if movieSelected.posterPath != nil {
+            moviePosterImageView.imageFromMovieDB(urlString: movieSelected.posterPath!, placeHolderImage: UIImage(named: "not_image")!, highResolution: true)
+        } else {
+            moviePosterImageView.image = UIImage(named: "not_image")!
+        }
         movieTitleLabel.text = movieSelected.title
-        movieDateCategoryLabel.text = movieSelected.releaseDate
+        movieDateCategoryLabel.text = movieSelected.releaseDate.convertReleaseDate
         movieOverviewPaddingLabel.text = movieSelected.overview
         movieVoteAverageLabel.text = String(movieSelected.voteAverage)
         movieOverviewPaddingLabel.padding(15, 20, 15, 20)

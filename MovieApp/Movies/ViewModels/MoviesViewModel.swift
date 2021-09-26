@@ -12,15 +12,15 @@ class MoviesViewModel {
     
     private var movieService = MovieService()
     
-    func getPopularMovies() -> Observable<Movies> {
-        return movieService.getPopularMovies()
+    func getPopularMovies(page: Int) -> Observable<Movies> {
+        return movieService.getPopularMovies(page: page)
     }
     
-    func getUpcomingMovies() -> Observable<Movies> {
-        return movieService.getUpcomingMovies()
+    func getUpcomingMovies(page: Int) -> Observable<Movies> {
+        return movieService.getUpcomingMovies(page: page)
     }
     
-    func getTopReloadMovies() -> Observable<Movies> {
-        return movieService.getTopRatedMovies()
+    func getTopReloadMovies(page: Int) -> Observable<Movies> {
+        return movieService.getTopRatedMovies(page: page)
     }
 }

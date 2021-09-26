@@ -10,7 +10,7 @@ import UIKit
 extension UIImageView {
     
     func imageFromUrl(urlString: String, placeHolderImage: UIImage) {
-        if self.image == nil || urlString == "" {
+        if self.image == nil {
             self.image = placeHolderImage
         }
         
@@ -29,7 +29,6 @@ extension UIImageView {
         if self.image == nil {
             self.image = placeHolderImage
         }
-
         let url = URL(string:(highResolution ? "\(Constants.URL.urlImagesMovieDB)/w500" : "\(Constants.URL.urlImagesMovieDB)/w200") + urlString)
 
         URLSession.shared.dataTask(with: url!) { (data, response, error) in

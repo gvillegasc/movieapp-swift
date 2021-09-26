@@ -18,8 +18,10 @@ class MoviesViewController: UIViewController {
     // MARK: - Variables
     private var viewModel = MoviesViewModel()
     private var disposeBag = DisposeBag()
-    private var popularMovies = [Movie]()
     private var movieSelected: Movie!
+    private var popularMoviesPage = 1
+    private var upcomingMoviesPage = 1
+    private var topRatedMoviesPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +42,22 @@ class MoviesViewController: UIViewController {
     }
     
     private func setupUI() {
-        popularMoviesCarousel.configureView(titleCarousel: "Popular Movies")
+        popularMoviesCarousel.configureView(titleCarousel: "Popular Movies", movieSection: Constants.MovieSection.popular)
         popularMoviesCarousel.delegate = self
-        upcomingMoviesCarousel.configureView(titleCarousel: "Upcoming Movies")
+        upcomingMoviesCarousel.configureView(titleCarousel: "Upcoming Movies", movieSection: Constants.MovieSection.upcoming)
         upcomingMoviesCarousel.delegate = self
-        topRatedMoviesCarousel.configureView(titleCarousel: "Top Rated Movies")
+        topRatedMoviesCarousel.configureView(titleCarousel: "Top Rated Movies", movieSection: Constants.MovieSection.topRated)
         topRatedMoviesCarousel.delegate = self
     }
     
     private func getSectionMovies() {
-        viewModel.getPopularMovies()
+        getPopularMovies()
+        getUpcomingMovies()
+        getTopReloadMovies()
+    }
+    
+    private func getPopularMovies() {
+        return viewModel.getPopularMovies(page: popularMoviesPage)
             .subscribe(on: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .subscribe(
@@ -60,7 +68,10 @@ class MoviesViewController: UIViewController {
                     print(error)
                 }
             ).disposed(by: disposeBag)
-        viewModel.getUpcomingMovies()
+    }
+    
+    private func getUpcomingMovies() {
+        return viewModel.getUpcomingMovies(page: upcomingMoviesPage)
             .subscribe(on: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .subscribe(
@@ -71,7 +82,10 @@ class MoviesViewController: UIViewController {
                     print(error)
                 }
             ).disposed(by: disposeBag)
-        viewModel.getTopReloadMovies()
+    }
+    
+    private func getTopReloadMovies() {
+       return viewModel.getTopReloadMovies(page: topRatedMoviesPage)
             .subscribe(on: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .subscribe(
@@ -87,9 +101,23 @@ class MoviesViewController: UIViewController {
 
 
 extension MoviesViewController: MovieCarouselProtocol {
-    
+
     func showMovieDetail(movieSelected: Movie) {
         self.movieSelected = movieSelected
         self.performSegue(withIdentifier: "MovieDetailViewController", sender: self)
     }
+
+    func loadMoreMovies(movieSection: Constants.MovieSection) {
+        if movieSection == Constants.MovieSection.popular {
+            popularMoviesPage += 1
+            getPopularMovies()
+        } else if movieSection == Constants.MovieSection.upcoming {
+            upcomingMoviesPage += 1
+            getUpcomingMovies()
+        } else {
+            topRatedMoviesPage += 1
+            getTopReloadMovies()
+        }
+    }
+    
 }

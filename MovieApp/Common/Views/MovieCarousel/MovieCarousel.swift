@@ -9,6 +9,7 @@ import UIKit
 
 protocol MovieCarouselProtocol {
     func showMovieDetail(movieSelected: Movie)
+    func loadMoreMovies(movieSection: Constants.MovieSection)
 }
 
 class MovieCarousel: UIView {
@@ -19,8 +20,10 @@ class MovieCarousel: UIView {
     @IBOutlet weak var movieCarouselCollectionView: UICollectionView!
     @IBOutlet weak var refreshView: UIView!
     @IBOutlet weak var refreshActivityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Variables
     private var movies: [Movie] = []
+    private var movieSection: Constants.MovieSection?
     var delegate: MovieCarouselProtocol!
 
     override init(frame: CGRect) {
@@ -39,18 +42,22 @@ class MovieCarousel: UIView {
         movieCarouselCollectionView?.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "movieCollectionViewCell")
         movieCarouselCollectionView?.delegate = self
         movieCarouselCollectionView?.dataSource = self
+        refreshView.isHidden = true
         self.addSubview(view)
     }
     
-    func configureView(titleCarousel: String) {
+    func configureView(titleCarousel: String, movieSection: Constants.MovieSection) {
         self.titleCarouselLabel.text = titleCarousel
+        self.movieSection = movieSection
     }
     
     func reloadCollectionView(movies: [Movie]) {
-        self.movies = movies
+        self.movies.append(contentsOf: movies)
         DispatchQueue.main.async {
             self.carouselActivityIndicator.stopAnimating()
             self.carouselActivityIndicator.isHidden = true
+            self.refreshActivityIndicator.stopAnimating()
+            self.refreshView.isHidden = true
             self.movieCarouselCollectionView.reloadData()
         }
     }
@@ -80,10 +87,22 @@ extension MovieCarousel: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = movieCarouselCollectionView.dequeueReusableCell(withReuseIdentifier: "movieCollectionViewCell", for: indexPath) as! MovieCollectionViewCell
-        cell.movieImageView.imageFromMovieDB(urlString: movies[indexPath.item].posterPath, placeHolderImage: UIImage(named: "not_image")!)
+        if movies[indexPath.item].posterPath != nil {
+            cell.movieImageView.imageFromMovieDB(urlString: movies[indexPath.item].posterPath!, placeHolderImage: UIImage(named: "not_image")!)
+        } else {
+            cell.movieImageView.image = UIImage(named: "not_image")!
+        }
         cell.movieTitleLabel.text = movies[indexPath.item].title
         cell.movieReleaseDateLabel.text = movies[indexPath.item].releaseDate.convertReleaseDate
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath.row == movies.count - 1 && !refreshActivityIndicator.isAnimating) {
+            refreshView.isHidden = false
+            refreshActivityIndicator.startAnimating()
+            self.delegate.loadMoreMovies(movieSection: self.movieSection!)
+         }
     }
 }
 

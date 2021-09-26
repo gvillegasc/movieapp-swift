@@ -12,5 +12,9 @@ struct Constants {
     struct URL {
         static let urlImagesMovieDB = "https://image.tmdb.org/t/p"
     }
+    
+    enum MovieSection {
+        case popular, upcoming, topRated
+    }
 }
 

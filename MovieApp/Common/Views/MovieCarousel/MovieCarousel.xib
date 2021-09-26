@@ -27,9 +27,6 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-RH-SUv">
-                    <rect key="frame" x="197" y="438" width="20" height="20"/>
-                </activityIndicatorView>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6w-AQ-sEf">
                     <rect key="frame" x="0.0" y="82" width="414" height="245"/>
                     <subviews>
@@ -63,16 +60,20 @@
                         </view>
                     </subviews>
                 </stackView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-RH-SUv">
+                    <rect key="frame" x="197" y="189" width="20" height="20"/>
+                    <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="8fa-2p-bjS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="1He-Ma-v82"/>
-                <constraint firstItem="iEa-RH-SUv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7Sz-2z-D3E"/>
                 <constraint firstItem="M6w-AQ-sEf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="DYY-SL-aIs"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8fa-2p-bjS" secondAttribute="trailing" constant="10" id="PDK-nj-tLp"/>
+                <constraint firstItem="iEa-RH-SUv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Rea-gy-ilJ"/>
                 <constraint firstItem="M6w-AQ-sEf" firstAttribute="top" secondItem="8fa-2p-bjS" secondAttribute="bottom" constant="5" id="SL4-Ra-7lZ"/>
-                <constraint firstItem="iEa-RH-SUv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="l6W-TL-9c2"/>
+                <constraint firstItem="iEa-RH-SUv" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="145" id="YxU-fk-l5V"/>
                 <constraint firstItem="8fa-2p-bjS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="vok-6N-Jwr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="M6w-AQ-sEf" secondAttribute="trailing" id="zou-4w-C65"/>
             </constraints>
