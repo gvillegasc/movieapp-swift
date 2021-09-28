@@ -20,7 +20,12 @@ extension UIImageView {
             DispatchQueue.main.async {
                 guard let data = data else { return }
                 let image = UIImage(data: data)
-                self.image = image
+                UIView.transition(with: self,
+                                  duration: 0.4,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                                    self.image = image
+                }, completion: nil)
             }
         }.resume()
     }
@@ -37,8 +42,14 @@ extension UIImageView {
             DispatchQueue.main.async {
                 guard let data = data else { return }
                 let image = UIImage(data: data)
-                self.image = image
+                UIView.transition(with: self,
+                                  duration: 0.4,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                                    self.image = image
+                }, completion: nil)
             }
         }.resume()
     }
+
 }

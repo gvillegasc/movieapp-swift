@@ -98,11 +98,11 @@ extension MovieCarousel: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (indexPath.row == movies.count - 1 && !refreshActivityIndicator.isAnimating) {
-            refreshView.isHidden = false
-            refreshActivityIndicator.startAnimating()
-            self.delegate.loadMoreMovies(movieSection: self.movieSection!)
-         }
+//        if (indexPath.item == movies.count - 1 && !refreshActivityIndicator.isAnimating) {
+//            refreshView.isHidden = false
+//            refreshActivityIndicator.startAnimating()
+//            self.delegate.loadMoreMovies(movieSection: self.movieSection!)
+//        }
     }
 }
 
