@@ -23,6 +23,7 @@ class MoviesViewController: UIViewController {
     private var upcomingMoviesPage = 1
     private var topRatedMoviesPage = 1
     
+    // MARK: - Lifecycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

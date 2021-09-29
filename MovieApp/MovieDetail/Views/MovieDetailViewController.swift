@@ -20,6 +20,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieOverviewPaddingLabel: PaddingLabel!
     @IBOutlet weak var castTitlePaddingLabel: PaddingLabel!
     @IBOutlet weak var castCollectionView: UICollectionView!
+    @IBOutlet weak var castActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var backLayoutConstraint: NSLayoutConstraint!
     
@@ -29,6 +30,7 @@ class MovieDetailViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var movieDetail: MovieDetail?
 
+    // MARK: - Lifecycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -36,6 +38,7 @@ class MovieDetailViewController: UIViewController {
         getMovieDetail()
     }
     
+    // MARK: - Actions
     @objc private func backAction(_ sender: UITapGestureRecognizer) {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
@@ -80,6 +83,8 @@ class MovieDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { movieDetail in
+                    self.castActivityIndicator.stopAnimating()
+                    self.castActivityIndicator.isHidden = true
                     self.movieDetail = movieDetail
                     self.reloadCollectionView()
                 },

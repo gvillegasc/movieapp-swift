@@ -14,6 +14,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieReleaseDateLabel: UILabel!
     
+    // MARK: - Lifecycle Events
     override func awakeFromNib() {
         super.awakeFromNib()
         movieImageView.layer.cornerRadius = 15

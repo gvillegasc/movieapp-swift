@@ -97,6 +97,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6A19E3302703F19C006AA576 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6A3CCA7226F40CA800BC5A31 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		6A3CCA6026F40CA800BC5A31 = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +129,6 @@
 				6A3CCA6C26F40CA800BC5A31 /* AppDelegate.swift */,
 				6A3CCA6E26F40CA800BC5A31 /* SceneDelegate.swift */,
 				6A3CCA7026F40CA800BC5A31 /* ViewController.swift */,
-				6A3CCA7226F40CA800BC5A31 /* Main.storyboard */,
 				6A5B7D2F26F6BAAC00BA0AF3 /* Common */,
 				6A3CCA8026F40CF900BC5A31 /* Extensions */,
 				6A3CCA8426F416A600BC5A31 /* Movies */,
@@ -266,6 +273,7 @@
 		6A9A928E26F7F5950050EF54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A19E3302703F19C006AA576 /* Storyboards */,
 				6A9A928F26F7F5A30050EF54 /* Constants.swift */,
 			);
 			path = Resources;

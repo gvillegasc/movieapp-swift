@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="COx-bH-2vH"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" id="8Av-db-enB"/>
                 </viewController>
@@ -240,11 +240,17 @@
                                                         </collectionViewFlowLayout>
                                                         <cells/>
                                                     </collectionView>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="6u1-0K-KpF">
+                                                        <rect key="frame" x="197" y="65" width="20" height="20"/>
+                                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstItem="6u1-0K-KpF" firstAttribute="centerX" secondItem="PZ9-3Y-6gR" secondAttribute="centerX" id="DA3-cw-aaA"/>
                                                     <constraint firstItem="QF7-Wf-uiZ" firstAttribute="leading" secondItem="PZ9-3Y-6gR" secondAttribute="leading" id="FFq-zT-cvP"/>
                                                     <constraint firstAttribute="bottom" secondItem="QF7-Wf-uiZ" secondAttribute="bottom" id="SMx-Fh-q2V"/>
+                                                    <constraint firstItem="6u1-0K-KpF" firstAttribute="centerY" secondItem="PZ9-3Y-6gR" secondAttribute="centerY" id="V1D-Ib-Z71"/>
                                                     <constraint firstItem="QF7-Wf-uiZ" firstAttribute="top" secondItem="PZ9-3Y-6gR" secondAttribute="top" id="gDQ-Ap-cR3"/>
                                                     <constraint firstAttribute="height" constant="150" id="lsg-Ni-IFv"/>
                                                     <constraint firstAttribute="trailing" secondItem="QF7-Wf-uiZ" secondAttribute="trailing" id="um9-zz-wIa"/>
@@ -283,6 +289,7 @@
                         <outlet property="backLayoutConstraint" destination="BiJ-oh-xgU" id="38X-ss-mJP"/>
                         <outlet property="backView" destination="5bJ-Sf-MxM" id="Tqd-5H-RVQ"/>
                         <outlet property="backgroundGradientView" destination="jA2-Kb-aKg" id="6Xw-C1-dks"/>
+                        <outlet property="castActivityIndicator" destination="6u1-0K-KpF" id="Tvm-gL-CsB"/>
                         <outlet property="castCollectionView" destination="QF7-Wf-uiZ" id="RDV-dC-Oom"/>
                         <outlet property="castTitlePaddingLabel" destination="k7G-hg-Xkq" id="d1W-YN-iTD"/>
                         <outlet property="movieDateCategoryLabel" destination="xeM-hz-g9Y" id="VcO-0l-AMC"/>

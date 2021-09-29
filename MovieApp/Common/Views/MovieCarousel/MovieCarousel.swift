@@ -25,7 +25,8 @@ class MovieCarousel: UIView {
     private var movies: [Movie] = []
     private var movieSection: Constants.MovieSection?
     var delegate: MovieCarouselProtocol!
-
+    
+    // MARK: - Lifecycle Events
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureView()
@@ -62,7 +63,6 @@ class MovieCarousel: UIView {
         }
     }
 }
-
 
 extension MovieCarousel: UICollectionViewDelegate{
     

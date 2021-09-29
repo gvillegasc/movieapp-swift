@@ -18,21 +18,21 @@ class MovieService: BaseAPI {
     
     func getPopularMovies(page: Int) -> Observable<Movies> {
         let url = URL(string: self.baseURL + EndPoints.popularMovies + self.apiKey + "&page=\(page)")
-        return URLSession.shared.requestObserver(url: url, expecting: Movies.self)
+        return URLSession.shared.request(url: url, expecting: Movies.self)
     }
     
     func getUpcomingMovies(page: Int) -> Observable<Movies> {
         let url = URL(string: self.baseURL + EndPoints.upcomingMovies + self.apiKey + "&page=\(page)")
-        return URLSession.shared.requestObserver(url: url, expecting: Movies.self)
+        return URLSession.shared.request(url: url, expecting: Movies.self)
     }
     
     func getTopRatedMovies(page: Int) -> Observable<Movies> {
         let url = URL(string: self.baseURL + EndPoints.topRatedMovies + self.apiKey + "&page=\(page)")
-        return URLSession.shared.requestObserver(url: url, expecting: Movies.self)
+        return URLSession.shared.request(url: url, expecting: Movies.self)
     }
     
     func getMovieDetail(movieId: Int) -> Observable<MovieDetail> {
         let url = URL(string: self.baseURL + "/movie/\(movieId)/credits"  + self.apiKey)
-        return URLSession.shared.requestObserver(url: url, expecting: MovieDetail.self)
+        return URLSession.shared.request(url: url, expecting: MovieDetail.self)
     }
 }
