@@ -12,6 +12,7 @@ protocol MovieCarouselProtocol {
     func loadMoreMovies(movieSection: Constants.MovieSection)
 }
 
+@IBDesignable
 class MovieCarousel: UIView {
     
     // MARK: - Outlets
@@ -98,11 +99,11 @@ extension MovieCarousel: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if (indexPath.item == movies.count - 1 && !refreshActivityIndicator.isAnimating) {
-//            refreshView.isHidden = false
-//            refreshActivityIndicator.startAnimating()
-//            self.delegate.loadMoreMovies(movieSection: self.movieSection!)
-//        }
+        if (indexPath.item == movies.count - 1 && !refreshActivityIndicator.isAnimating) {
+            refreshView.isHidden = false
+            refreshActivityIndicator.startAnimating()
+            self.delegate.loadMoreMovies(movieSection: self.movieSection!)
+        }
     }
 }
 

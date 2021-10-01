@@ -6,50 +6,14 @@
 //
 
 import UIKit
+import SDWebImage
 
 extension UIImageView {
     
-    func imageFromUrl(urlString: String, placeHolderImage: UIImage) {
-        if self.image == nil {
-            self.image = placeHolderImage
-        }
-        
-        URLSession.shared.dataTask(with: URL(string: urlString)!) { (data, response, error) in
-            if error != nil { return }
-            
-            DispatchQueue.main.async {
-                guard let data = data else { return }
-                let image = UIImage(data: data)
-                UIView.transition(with: self,
-                                  duration: 0.4,
-                                  options: .transitionCrossDissolve,
-                                  animations: {
-                                    self.image = image
-                }, completion: nil)
-            }
-        }.resume()
-    }
-    
     func imageFromMovieDB(urlString: String, placeHolderImage: UIImage, highResolution: Bool = false) {
-        if self.image == nil {
-            self.image = placeHolderImage
-        }
         let url = URL(string:(highResolution ? "\(Constants.URL.urlImagesMovieDB)/w500" : "\(Constants.URL.urlImagesMovieDB)/w200") + urlString)
-
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil { return }
-
-            DispatchQueue.main.async {
-                guard let data = data else { return }
-                let image = UIImage(data: data)
-                UIView.transition(with: self,
-                                  duration: 0.4,
-                                  options: .transitionCrossDissolve,
-                                  animations: {
-                                    self.image = image
-                }, completion: nil)
-            }
-        }.resume()
+        self.sd_setImage(with: url, placeholderImage: placeHolderImage, options: [.progressiveLoad]) { [weak self] (image, error, type, url) in
+                self!.image = image
+        }
     }
-
 }
