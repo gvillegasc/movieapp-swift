@@ -23,12 +23,15 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var castActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var backLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favoriteLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Variables
     var movieSelected: Movie!
     private var viewModel = MovieDetailViewModel()
     private var disposeBag = DisposeBag()
     private var movieDetail: MovieDetail?
+    private let helper = DBHelper()
 
     // MARK: - Lifecycle Events
     override func viewDidLoad() {
@@ -36,6 +39,7 @@ class MovieDetailViewController: UIViewController {
         setupUI()
         hideNavigationBar()
         getMovieDetail()
+        
     }
     
     // MARK: - Actions
@@ -53,10 +57,15 @@ class MovieDetailViewController: UIViewController {
         backgroundGradientView.layer.addSublayer(gradientLayer)
         let topPadding = UIApplication.topSafeAreaHeight
         backLayoutConstraint.constant = topPadding + 20
+        favoriteLayoutConstraint.constant = topPadding + 20
         backView.layer.cornerRadius = backView.frame.size.width / 2
         backView.clipsToBounds = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.backAction(_:)))
         backView.addGestureRecognizer(gesture)
+        let isFavorite = helper.searchMovie(id: movieSelected.id)
+        if isFavorite {
+            favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        }
         setupMovieSelected()
     }
     
@@ -98,6 +107,10 @@ class MovieDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.castCollectionView.reloadData()
         }
+    }
+    
+    @IBAction func favoriteButtonAction(_ sender: Any) {
+        helper.insertMovie(movie: movieSelected!)
     }
 }
 

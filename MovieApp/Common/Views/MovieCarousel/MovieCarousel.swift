@@ -12,7 +12,6 @@ protocol MovieCarouselProtocol {
     func loadMoreMovies(movieSection: Constants.MovieSection)
 }
 
-@IBDesignable
 class MovieCarousel: UIView {
     
     // MARK: - Outlets
@@ -65,7 +64,7 @@ class MovieCarousel: UIView {
     }
 }
 
-extension MovieCarousel: UICollectionViewDelegate{
+extension MovieCarousel: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 135, height: 245)

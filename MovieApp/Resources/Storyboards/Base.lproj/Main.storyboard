@@ -12,18 +12,52 @@
         <!--Favorites-->
         <scene sceneID="FmL-V4-kFy">
             <objects>
-                <viewController id="rUE-gV-t0P" sceneMemberID="viewController">
+                <viewController id="rUE-gV-t0P" customClass="FavoritesViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fiy-TT-Y4w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qkQ-n9-1gP">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="COx-bH-2vH"/>
                         <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="qkQ-n9-1gP" firstAttribute="bottom" secondItem="COx-bH-2vH" secondAttribute="bottom" id="8Og-9p-fU9"/>
+                            <constraint firstItem="qkQ-n9-1gP" firstAttribute="leading" secondItem="COx-bH-2vH" secondAttribute="leading" id="bmw-13-iag"/>
+                            <constraint firstItem="qkQ-n9-1gP" firstAttribute="trailing" secondItem="COx-bH-2vH" secondAttribute="trailing" id="o9u-tV-xjO"/>
+                            <constraint firstItem="qkQ-n9-1gP" firstAttribute="top" secondItem="COx-bH-2vH" secondAttribute="top" id="tBy-KE-t9I"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" id="8Av-db-enB"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="kHM-wo-kNA"/>
+                    <connections>
+                        <outlet property="favoritesTableView" destination="qkQ-n9-1gP" id="sQt-cg-gs3"/>
+                        <segue destination="XUN-TP-zbT" kind="show" identifier="FavoritesToMovieDetail" id="oc2-uV-kNy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPf-ZG-fVx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1873" y="333"/>
+            <point key="canvasLocation" x="2840.579710144928" y="365.625"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="JCm-4N-QtL">
+            <objects>
+                <navigationController id="QTG-jB-yhv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="92s-tW-gEK"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k1d-bf-1E6">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rUE-gV-t0P" kind="relationship" relationship="rootViewController" id="d0k-N1-Clr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eVT-dt-MGw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1871" y="366"/>
         </scene>
         <!--Movies-->
         <scene sceneID="B1K-jl-t3t">
@@ -92,7 +126,7 @@
                         <outlet property="popularMoviesCarousel" destination="6KO-vd-XNn" id="0p7-gv-AsI"/>
                         <outlet property="topRatedMoviesCarousel" destination="fs1-ye-V1r" id="dEc-eU-ohu"/>
                         <outlet property="upcomingMoviesCarousel" destination="Sym-II-0xw" id="9mP-GD-Lo5"/>
-                        <segue destination="XUN-TP-zbT" kind="show" identifier="MovieDetailViewController" id="LDF-Jg-bo9"/>
+                        <segue destination="XUN-TP-zbT" kind="show" identifier="MoviesToMovieDetail" id="LDF-Jg-bo9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBJ-bN-x0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -160,6 +194,29 @@
                                                             <constraint firstItem="eVg-6K-lGc" firstAttribute="centerX" secondItem="5bJ-Sf-MxM" secondAttribute="centerX" id="bVD-aq-rUD"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5lo-hN-7Wb">
+                                                        <rect key="frame" x="344" y="35" width="35" height="35"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qq-db-xX3">
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="favoriteButtonAction:" destination="XUN-TP-zbT" eventType="touchUpInside" id="40g-L1-2oh"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="35" id="4WW-yZ-ozH"/>
+                                                            <constraint firstAttribute="trailing" secondItem="2Qq-db-xX3" secondAttribute="trailing" id="Aue-is-rgl"/>
+                                                            <constraint firstItem="2Qq-db-xX3" firstAttribute="leading" secondItem="5lo-hN-7Wb" secondAttribute="leading" id="nnU-D2-Pd5"/>
+                                                            <constraint firstAttribute="height" constant="35" id="wHO-Vv-IYF"/>
+                                                            <constraint firstItem="2Qq-db-xX3" firstAttribute="top" secondItem="5lo-hN-7Wb" secondAttribute="top" id="xNp-ad-tcq"/>
+                                                            <constraint firstAttribute="bottom" secondItem="2Qq-db-xX3" secondAttribute="bottom" id="zIw-xs-ka1"/>
+                                                        </constraints>
+                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyb-MN-W8L">
                                                         <rect key="frame" x="20" y="501" width="374" height="36"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -195,12 +252,14 @@
                                                 <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="5bJ-Sf-MxM" firstAttribute="top" secondItem="JS8-j8-Btw" secondAttribute="top" constant="20" id="BiJ-oh-xgU"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5lo-hN-7Wb" secondAttribute="trailing" constant="35" id="KB6-Vw-mw3"/>
                                                     <constraint firstItem="5bJ-Sf-MxM" firstAttribute="leading" secondItem="JS8-j8-Btw" secondAttribute="leading" constant="20" id="L9a-jo-YMU"/>
                                                     <constraint firstItem="jA2-Kb-aKg" firstAttribute="leading" secondItem="JS8-j8-Btw" secondAttribute="leading" id="M8N-mY-clL"/>
                                                     <constraint firstAttribute="trailing" secondItem="xeM-hz-g9Y" secondAttribute="trailing" constant="20" id="P8c-A3-Q1h"/>
                                                     <constraint firstItem="yyb-MN-W8L" firstAttribute="leading" secondItem="JS8-j8-Btw" secondAttribute="leading" constant="20" id="Wev-QU-ZIW"/>
                                                     <constraint firstAttribute="bottom" secondItem="e3b-or-95s" secondAttribute="bottom" id="Wvi-TJ-k8h"/>
                                                     <constraint firstItem="e3b-or-95s" firstAttribute="leading" secondItem="JS8-j8-Btw" secondAttribute="leading" id="XTz-Wv-9yT"/>
+                                                    <constraint firstItem="5lo-hN-7Wb" firstAttribute="top" secondItem="JS8-j8-Btw" secondAttribute="top" constant="35" id="awd-Ld-gWZ"/>
                                                     <constraint firstItem="6WA-Va-SWE" firstAttribute="top" secondItem="xeM-hz-g9Y" secondAttribute="bottom" constant="5" id="cfW-Lt-xNr"/>
                                                     <constraint firstAttribute="bottom" secondItem="6WA-Va-SWE" secondAttribute="bottom" constant="5" id="dMz-Di-DBS"/>
                                                     <constraint firstItem="e3b-or-95s" firstAttribute="top" secondItem="JS8-j8-Btw" secondAttribute="top" id="f82-1p-9JD"/>
@@ -293,6 +352,8 @@
                         <outlet property="castActivityIndicator" destination="6u1-0K-KpF" id="Tvm-gL-CsB"/>
                         <outlet property="castCollectionView" destination="QF7-Wf-uiZ" id="RDV-dC-Oom"/>
                         <outlet property="castTitlePaddingLabel" destination="k7G-hg-Xkq" id="d1W-YN-iTD"/>
+                        <outlet property="favoriteButton" destination="2Qq-db-xX3" id="dei-y7-vfg"/>
+                        <outlet property="favoriteLayoutConstraint" destination="awd-Ld-gWZ" id="sc1-j9-xy1"/>
                         <outlet property="movieDateCategoryLabel" destination="xeM-hz-g9Y" id="VcO-0l-AMC"/>
                         <outlet property="movieOverviewPaddingLabel" destination="he4-GO-Ejh" id="PoK-m4-qlZ"/>
                         <outlet property="moviePosterImageView" destination="e3b-or-95s" id="NRL-KR-DIW"/>
@@ -303,12 +364,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4f-ge-CeS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3734.7826086956525" y="-348.21428571428572"/>
+            <point key="canvasLocation" x="3825" y="27"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fjk-8H-ASw">
             <objects>
-                <tabBarController id="Rh6-0j-42d" sceneMemberID="viewController">
+                <tabBarController id="Rh6-0j-42d" customClass="TabBarController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bdx-gH-yGU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -316,7 +377,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="qHS-bR-joV" kind="relationship" relationship="viewControllers" id="4vs-ku-Igh"/>
-                        <segue destination="rUE-gV-t0P" kind="relationship" relationship="viewControllers" id="JmN-hv-Tfj"/>
+                        <segue destination="QTG-jB-yhv" kind="relationship" relationship="viewControllers" id="1yH-VD-LYt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaV-AD-RhY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -324,6 +385,9 @@
             <point key="canvasLocation" x="981" y="28"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="oc2-uV-kNy"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <image name="star" catalog="system" width="128" height="116"/>

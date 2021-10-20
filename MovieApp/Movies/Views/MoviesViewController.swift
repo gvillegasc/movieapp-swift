@@ -36,7 +36,7 @@ class MoviesViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MovieDetailViewController" {
+        if segue.identifier == "MoviesToMovieDetail" {
             let controller = segue.destination as? MovieDetailViewController
             controller?.movieSelected = movieSelected
         }
@@ -105,7 +105,7 @@ extension MoviesViewController: MovieCarouselProtocol {
 
     func showMovieDetail(movieSelected: Movie) {
         self.movieSelected = movieSelected
-        self.performSegue(withIdentifier: "MovieDetailViewController", sender: self)
+        self.performSegue(withIdentifier: "MoviesToMovieDetail", sender: self)
     }
 
     func loadMoreMovies(movieSection: Constants.MovieSection) {

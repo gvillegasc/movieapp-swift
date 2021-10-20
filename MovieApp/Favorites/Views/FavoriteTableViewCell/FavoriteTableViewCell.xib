@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteTableViewCell" rowHeight="90" id="KGk-i7-Jjw" customClass="FavoriteTableViewCell" customModule="MovieApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not_image" translatesAutoresizingMaskIntoConstraints="NO" id="GCD-Kn-bvd">
+                        <rect key="frame" x="10" y="5" width="55" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="ahu-H9-Knp"/>
+                            <constraint firstAttribute="height" constant="80" id="mNC-hx-GA5"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRu-Xb-REr">
+                        <rect key="frame" x="75" y="22" width="235" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJt-B0-k8E">
+                        <rect key="frame" x="75" y="50" width="235" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aRu-Xb-REr" firstAttribute="leading" secondItem="GCD-Kn-bvd" secondAttribute="trailing" constant="10" id="8vw-aN-BYy"/>
+                    <constraint firstItem="GCD-Kn-bvd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9VH-MT-N9h"/>
+                    <constraint firstItem="GCD-Kn-bvd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="9Vu-hM-Gcx"/>
+                    <constraint firstItem="rJt-B0-k8E" firstAttribute="top" secondItem="aRu-Xb-REr" secondAttribute="bottom" constant="10" id="CCu-8a-bJf"/>
+                    <constraint firstItem="rJt-B0-k8E" firstAttribute="leading" secondItem="GCD-Kn-bvd" secondAttribute="trailing" constant="10" id="EDy-Os-INm"/>
+                    <constraint firstItem="aRu-Xb-REr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="cQ3-M5-wfh"/>
+                    <constraint firstAttribute="trailing" secondItem="rJt-B0-k8E" secondAttribute="trailing" constant="10" id="g9h-Uq-50T"/>
+                    <constraint firstAttribute="trailing" secondItem="aRu-Xb-REr" secondAttribute="trailing" constant="10" id="v1n-bA-uEu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="movieImage" destination="GCD-Kn-bvd" id="TCk-MX-2K8"/>
+                <outlet property="releaseDateMovieLabel" destination="rJt-B0-k8E" id="yyc-2C-XHI"/>
+                <outlet property="titleMovieLabel" destination="aRu-Xb-REr" id="WFm-qE-m6i"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="67"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="not_image" width="412.5" height="550"/>
+    </resources>
+</document>

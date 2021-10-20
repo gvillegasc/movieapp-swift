@@ -16,9 +16,9 @@ struct Movies: Codable {
 }
 
 struct Movie: Codable {
+    let id: Int
     let title: String
     let popularity: Double
-    let id: Int
     let voteCount: Int
     let originalTitle: String
     let voteAverage: Double
@@ -27,9 +27,9 @@ struct Movie: Codable {
     let posterPath: String?
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case title
         case popularity
-        case id = "id"
         case voteCount = "vote_count"
         case originalTitle = "original_title"
         case voteAverage = "vote_average"
