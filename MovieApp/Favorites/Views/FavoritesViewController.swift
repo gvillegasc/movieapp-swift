@@ -6,24 +6,29 @@
 //
 
 import UIKit
+import RxSwift
 
 class FavoritesViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var favoritesTableView: UITableView!
+    @IBOutlet weak var withoutFavoritesView: UIView!
     
+    // MARK: - Variables
     private var favoriteMovies: [Movie] = []
     private var movieSelected: Movie!
-    private var helper = DBHelper()
+    private var viewModel = FavoritesViewModel()
+    private var disposeBag = DisposeBag()
 
+    // MARK: - Lifecycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        favoriteMovies = helper.getFavoriteMovies()
-        reloadTableView()
+        getFavoriteMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,14 +50,37 @@ class FavoritesViewController: UIViewController {
         favoritesTableView.dataSource = self
     }
     
+    private func getFavoriteMovies() {
+        return viewModel.getFavoriteMovies()
+            .subscribe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                onNext: { favoriteMovies in
+                    if favoriteMovies.isEmpty {
+                        self.favoritesTableView.isHidden = true
+                        self.withoutFavoritesView.isHidden = false
+                    } else {
+                        self.favoriteMovies = favoriteMovies
+                        self.favoritesTableView.isHidden = false
+                        self.withoutFavoritesView.isHidden = true
+                        self.reloadTableView()
+                    }
+                },
+                onError: { error in
+                    print(error)
+                }
+            ).disposed(by: disposeBag)
+    }
+    
     private func reloadTableView() {
         DispatchQueue.main.async {
             self.favoritesTableView.reloadData()
         }
     }
-    
 }
 
+
+// MARK: - UITableViewDelegate
 extension FavoritesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -60,6 +88,7 @@ extension FavoritesViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

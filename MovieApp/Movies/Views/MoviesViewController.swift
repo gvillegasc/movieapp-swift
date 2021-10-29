@@ -100,7 +100,7 @@ class MoviesViewController: UIViewController {
     }
 }
 
-
+// MARK: - MovieCarouselProtocol
 extension MoviesViewController: MovieCarouselProtocol {
 
     func showMovieDetail(movieSelected: Movie) {
@@ -120,5 +120,4 @@ extension MoviesViewController: MovieCarouselProtocol {
             getTopReloadMovies()
         }
     }
-    
 }

@@ -64,6 +64,7 @@ class MovieCarousel: UIView {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension MovieCarousel: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -83,6 +84,7 @@ extension MovieCarousel: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension MovieCarousel: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -106,4 +108,5 @@ extension MovieCarousel: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension MovieCarousel: UICollectionViewDelegateFlowLayout { }

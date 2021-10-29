@@ -8,10 +8,13 @@
 import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
+    
+    // MARK: - Outlets
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var titleMovieLabel: UILabel!
     @IBOutlet weak var releaseDateMovieLabel: UILabel!
     
+    // MARK: - Lifecycle Events
     override func awakeFromNib() {
         super.awakeFromNib()
     }

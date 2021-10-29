@@ -15,4 +15,16 @@ class MovieDetailViewModel {
     func getMovieDetail(movieId: Int) -> Observable<MovieDetail> {
         return movieService.getMovieDetail(movieId: movieId)
     }
+    
+    func searchMovie(movieId: Int) -> Observable<Bool> {
+        return LocalDB.shared.searchMovie(movieId: movieId)
+    }
+    
+    func insertMovie(movie: Movie) -> Observable<Bool> {
+        return LocalDB.shared.insertMovie(movie: movie)
+    }
+    
+    func deleteMovie(movieId: Int) -> Observable<Bool> {
+        return LocalDB.shared.deleteMovie(id: movieId)
+    }
 }

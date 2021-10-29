@@ -12,5 +12,4 @@ class BaseAPI {
     
     let baseURL = "https://api.themoviedb.org/3"
     let apiKey = "?api_key=54a3b24c28fbd03f5fc071856b5b5bc2"
-    
 }

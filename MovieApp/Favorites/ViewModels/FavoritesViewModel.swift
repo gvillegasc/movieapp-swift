@@ -10,15 +10,7 @@ import RxSwift
 
 class FavoritesViewModel {
     
-    private var helper = DBHelper()
-    
     func getFavoriteMovies() -> Observable<[Movie]> {
-
-        return Observable.create { observer in
-            let movies = self.helper.getFavoriteMovies()
-//                return movies
-            observer.onNext(movies)
-            return Disposables.create {}
-        }
+        return LocalDB.shared.loadMovies()
     }
 }

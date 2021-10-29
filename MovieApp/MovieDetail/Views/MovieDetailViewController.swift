@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import SnackBar
 
 class MovieDetailViewController: UIViewController {
     
@@ -31,15 +32,16 @@ class MovieDetailViewController: UIViewController {
     private var viewModel = MovieDetailViewModel()
     private var disposeBag = DisposeBag()
     private var movieDetail: MovieDetail?
-    private let helper = DBHelper()
+    private var isFavorite = false
 
     // MARK: - Lifecycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        searchMovie()
+        setupMovieSelected()
         hideNavigationBar()
         getMovieDetail()
-        
     }
     
     // MARK: - Actions
@@ -49,12 +51,39 @@ class MovieDetailViewController: UIViewController {
         }
      }
     
+    @IBAction func favoriteButtonAction(_ sender: Any) {
+        if isFavorite {
+            viewModel.deleteMovie(movieId: movieSelected.id)
+                .subscribe(on: MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
+                .subscribe(
+                    onNext: { isDeleted in
+                        MovieStatusSnackBar.make(in: self.view, message: "Movie removes from favorites", duration: .lengthLong).show()
+                        self.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+                        self.isFavorite = false
+                    }
+                ).disposed(by: disposeBag)
+        } else {
+            viewModel.insertMovie(movie: movieSelected!)
+                .subscribe(on: MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
+                .subscribe(
+                    onNext: { isCreated in
+                        MovieStatusSnackBar.make(in: self.view, message: "Movie saved in favorites", duration: .lengthLong).show()
+                        self.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                        self.isFavorite = true
+                    }
+                ).disposed(by: disposeBag)
+        }
+
+    }
+    
     private func setupUI() {
         viewScrollView.contentInsetAdjustmentBehavior = .never
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = backgroundGradientView.frame.size
         gradientLayer.colors = [UIColor.darkBackground.withAlphaComponent(0.3).cgColor, UIColor.darkBackground.withAlphaComponent(1).cgColor]
         backgroundGradientView.layer.addSublayer(gradientLayer)
+        gradientLayer.frame = backgroundGradientView.bounds
         let topPadding = UIApplication.topSafeAreaHeight
         backLayoutConstraint.constant = topPadding + 20
         favoriteLayoutConstraint.constant = topPadding + 20
@@ -62,11 +91,20 @@ class MovieDetailViewController: UIViewController {
         backView.clipsToBounds = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.backAction(_:)))
         backView.addGestureRecognizer(gesture)
-        let isFavorite = helper.searchMovie(id: movieSelected.id)
-        if isFavorite {
-            favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        }
-        setupMovieSelected()
+    }
+    
+    private func searchMovie() {
+        return viewModel.searchMovie(movieId: movieSelected.id)
+            .subscribe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                onNext: { isFavorite in
+                    self.isFavorite = isFavorite
+                    if self.isFavorite {
+                        self.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                    }
+                }
+            ).disposed(by: disposeBag)
     }
     
     private func setupMovieSelected() {
@@ -108,12 +146,9 @@ class MovieDetailViewController: UIViewController {
             self.castCollectionView.reloadData()
         }
     }
-    
-    @IBAction func favoriteButtonAction(_ sender: Any) {
-        helper.insertMovie(movie: movieSelected!)
-    }
 }
 
+// MARK: - UICollectionViewDelegate
 extension MovieDetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -129,6 +164,7 @@ extension MovieDetailViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension MovieDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -144,4 +180,16 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension MovieDetailViewController: UICollectionViewDelegateFlowLayout { }
+
+private class MovieStatusSnackBar: SnackBar {
+    
+    override var style: SnackBarStyle {
+        var style = SnackBarStyle()
+        style.background = UIColor(red: 51.0/255, green: 51.0/255, blue: 50.0/255, alpha: 1.0)
+        style.textColor = .white
+        style.font = UIFont.systemFont(ofSize: 16)
+        return style
+    }
+}
